@@ -9,6 +9,8 @@ class Flan(models.Model):
     image_url = models.URLField()
     slug = models.SlugField()
     is_private = models.BooleanField()
+    price = models.IntegerField(default=0)
+    preparation = models.TextField(default="")
     
     def __str__(self):
         return self.name

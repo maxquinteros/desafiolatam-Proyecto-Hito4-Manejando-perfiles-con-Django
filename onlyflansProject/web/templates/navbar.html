@@ -1,23 +1,43 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="./">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./bienvenido">Bienvenido</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./acerca">Acerca</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./contacto">Contacto</a>
-                </li>
-            </ul>
-        </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Inicio</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'welcome' %}">Bienvenido</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'detalles' %}">Detalles</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about' %}">Acerca</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto d-flex align-items-center">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <span class="navbar-text me-3 badge bg-secondary rounded-pill px-3 py-2 text-light">Usuario: {{ user.get_username }}</span>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-secondary" href="{% url 'logout' %}">Cerrar sesión</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="btn btn-outline-secondary" href="{% url 'login' %}">Iniciar sesión</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
+  
